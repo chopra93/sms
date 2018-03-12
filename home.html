@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index</title>
+	
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="assets/materialize/css/materialize.min.css" media="screen,projection" />
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css"> 
+</head>
+<body ng-app="sms" ng-controller="smsController">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand waves-effect waves-dark" href="home.html"><strong>CHOPRA SMS</strong></a>
+		        </div>
+            <ul class="nav navbar-top-links navbar-right"> 
+              <li><a class="dropdown-button waves-effect waves-dark" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout </a></li>
+            </ul>
+        </nav>
+		
+        <div ng-init=" fetchService();" id="page-wrapper" style="margin-left: 0px;">	    
+            <div class="header"> 
+                <h1 class="page-header">Dashboard</small></h1>
+    				    <ol class="breadcrumb">
+    					     <li><a href="home.html">Home</a></li>
+    					  </ol> 
+    		   	</div> 
+              <div class="col-md-6">
+                  <div class="card">
+                      <div class="card-content">
+                        <h3><center><font color="red"><strong>Send SMS</strong></font></center></h3>
+                        <hr>
+                        <form class="col s12">
+                            <div class="input-field col s7">
+                               Enter number
+                               <input type="number" ng-model="phone">
+                            </div>
+                            <div class="input-field col s7">
+                              Message
+                               <input type="text" ng-model="message">
+                            </div>
+                            <div class="input-field col s7">
+                                <input type="submit" ng-model="sendResponse" ng-click="sendSms()"/>
+                            </div>
+                        </form>
+                        <img id="mySpinner" style="width:100px;height:89px;position:absolute;top:50%;left:38%;padding:2px;" src="assets/img/spinner.gif" ng-show="loading" />
+                      </div>
+                    
+                      <div class="card-content" ng-if="sendResponse">
+                        <font color="red">{{sendResponse.data.message}}</font>
+                      </div>
+                  </div>
+               </div>
+
+               <div class="col-md-6">
+                  <div class="card">
+                      <div class="card-content">
+                        <h3><center><font color="red"><strong>Bulk Upload</strong></font></center></h3>
+                        <hr>
+                        <form class="col s3">
+                            <div class="input-field col s7">
+                               Upload File
+                               <input type="file" file-model="myFile"/>
+                            </div>
+                            <div class="input-field col s7">
+                              Message
+                               <input type="text" ng-model="bulkmessage">
+                            </div>
+                            <div class="input-field col s7">
+                                <button ng-click="upload(bulkmessage)">upload me</button>      This we will process by our own (Make sure to buy BULK Pack)
+                            </div>
+                        </form>
+                      </div>
+                  </div>
+               </div> 
+
+               <div class="dashboard-cards"> 
+
+                <div ng-repeat="n in fetchServiceResponse.data.serviceList" class="col-md-2">
+                  <div class="card horizontal cardIcon waves-effect waves-dark">
+                     <div class="card-stacked red">
+                        <div class="card-content">
+                           <h3>{{n.limit}}</h3> 
+                        </div>
+                        <div class="card-action">
+                          <strong>
+                            <a href="payment.html" rel="im-checkout" data-behaviour="remote" data-style="light" data-text="BUY MORE {{n.serviceType}}"></a>
+                          </strong>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+
+                <!-- <div class="col-xs-12 col-sm-6 col-md-3">
+                  <div class="card horizontal cardIcon waves-effect waves-dark">
+                     <div class="card-image red">
+                       <i class="material-icons dp48">chat_bubble</i>
+                     </div>
+                     <div class="card-stacked red">
+                        <div class="card-content">
+                           <h3>100</h3> 
+                        </div>
+                        <div class="card-action">
+                          <strong>BUY MORE BULK</strong>
+                        </div>
+                     </div>
+                  </div>
+                </div> -->
+
+              </div>
+        </div>
+     <!--<a href="https://www.instamojo.com/chopra/pack-of-100-sms/" rel="im-checkout" data-behaviour="remote" data-style="flat-dark" data-text="Checkout"></a>-->
+     <script src="https://js.instamojo.com/v1/button.js"></script>
+
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	  <script src="assets/materialize/js/materialize.min.js"></script>
+	  <script src="assets/js/jquery.metisMenu.js"></script> 
+    <!--<script src="assets/js/custom-scripts.js"></script> -->
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.js"></script>
+    <script type="text/javascript" src="controller/Controller.js"></script>
+    
+    <script src="https://js.instamojo.com/v1/button.js"></script>
+</body>
+</html>
